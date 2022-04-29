@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     })
 
+    // 전면 광고
     var mInterstitialAd : InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -345,7 +346,7 @@ class MainActivity : AppCompatActivity() {
     private fun setInterstitialAds(){
         val adRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(this,"ca-app-pub-5184391281916345/2262312003", adRequest, object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d("ads log", "전면 광고 로드를 실패하였습니다. ${adError.responseInfo}")
                 mInterstitialAd = null
