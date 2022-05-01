@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:65638167556:android:45239c27ce45ba3b6db151",
+        "mobilesdk_app_id": "1:65638167556:android:04ee1b0fa8668dc96db151",
         "android_client_info": {
           "package_name": "com.example.airquality"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "65638167556-alceb9f4540um2raafa7sltalnfkr4gf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.airquality",
+            "certificate_hash": "eab3eb886803dd181cdf84bb8f30afb29fbd25aa"
+          }
+        },
         {
           "client_id": "65638167556-ugt1nq0b1jj778cip8tq7r1b7fdvhqsg.apps.googleusercontent.com",
           "client_type": 3

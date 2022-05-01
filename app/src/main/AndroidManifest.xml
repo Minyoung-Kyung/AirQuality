@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.airquality">
     <!-- Internet Permission -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- GPS & Location -->
@@ -13,17 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AirQuality">
-        <activity
-            android:name=".MapActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDETSXIlBa0QLkErvpP6PYQrKcrSZugrCc" />
+
         <!-- 애드몹 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5184391281916345~3575393670" />
+
+        <activity android:name=".MapActivity"
+            android:exported="true"
+            />
 
         <activity
             android:name=".MainActivity"

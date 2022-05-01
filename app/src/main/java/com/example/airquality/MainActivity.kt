@@ -27,6 +27,7 @@ import com.example.airquality.retrofit.RetrofitConnection
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,10 +46,12 @@ class MainActivity : AppCompatActivity() {
     private val PERMISSIONS_REQUEST_CODE = 100
 
     // 요청할 권한 목록
-    var REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+    var REQUIRED_PERMISSIONS = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION)
 
     lateinit var binding: ActivityMainBinding
-    lateinit var getGPSPermissionLauncher: ActivityResultLauncher<Intent>
+    lateinit var getGPSPermissionLauncher: ActivityResultLauncher<Intent> // 위치 서비스 요청 시 필요한 런처
     lateinit var locationProvider: LocationProvider
 
     val startMapActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
@@ -107,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                mInterstitialAd!!.show(this)
+                mInterstitialAd!!.show(this@MainActivity)
             }else{
                 Log.d("InterstitialAd", "전면 광고가 로딩되지 않았습니다.")
                 Toast.makeText(
@@ -127,9 +130,11 @@ class MainActivity : AppCompatActivity() {
 
     // 배너 광고 설정 함수
     private fun setBannerAds(){
-        MobileAds.initialize(this);
+        MobileAds.initialize(this) // 광고 SDK 초기화
         val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+        binding.adView.loadAd(adRequest) // 애드부에 광고 로드
+
+        // 애드뷰 리스너 추가
         binding.adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
                 Log.d("ads log","배너 광고가 로드되었습니다.")
@@ -140,7 +145,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onAdOpened() {
-                Log.d("ads log","배너 광고를 열었습니다.") //전면에 광고가 오버레이 되었을 때
+                Log.d("ads log","배너 광고를 열었습니다.") // 전면에 광고가 오버레이 되었을 때
             }
 
             override fun onAdClicked() {
@@ -172,6 +177,8 @@ class MainActivity : AppCompatActivity() {
 
             // 2. 현재 미세먼지 농도를 가져온 후 UI 업데이트
             getAirQualityData(latitude, longitude)
+            println(latitude)
+            println(longitude)
 
         } else {
             Toast.makeText(this@MainActivity, "위도, 경도 정보를 가져올 수 없었습니다. 새로고침을 눌러주세요.", Toast.LENGTH_LONG).show()
@@ -182,7 +189,7 @@ class MainActivity : AppCompatActivity() {
     private fun getAirQualityData(latitude: Double, longitude: Double) {
         val retrofitAPI = RetrofitConnection.getInstance().create(AirQualityService::class.java)
 
-        retrofitAPI.getAirQualityData(latitude.toString(), longitude.toString(), "5c8d237f-0c69-447f-a307-aeb7569a65eb")
+        retrofitAPI.getAirQualityData(latitude.toString(), longitude.toString(), "f8fd9cb8-5c8d237f-0c69-447f-a307-aeb7569a65eb")
             .enqueue(object : Callback<AirQualityResponse> {
                 override fun onResponse(
                     call: Call<AirQualityResponse>,
