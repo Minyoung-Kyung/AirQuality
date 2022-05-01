@@ -12,13 +12,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapActivity : AppCompatActivity() ,OnMapReadyCallback{
+class MapActivity : AppCompatActivity(), OnMapReadyCallback{
 
     lateinit var binding: ActivityMapBinding
 
     private var mMap: GoogleMap? = null
-    var currentLat: Double = 0.0 // MainActivity에서 전달된 위도
-    var currentLng: Double = 0.0 // MainActivity에서 전달된 경도
+    var currentLat: Double = 37.4166 // MainActivity에서 전달된 위도
+    var currentLng: Double = 126.8872 // MainActivity에서 전달된 경도
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +26,8 @@ class MapActivity : AppCompatActivity() ,OnMapReadyCallback{
         setContentView(binding.root)
 
         // MainActivity에서 intent로 전달된 값 가져오기
-        currentLat = intent.getDoubleExtra("currentLat", 0.0)
-        currentLng = intent.getDoubleExtra("currentLng", 0.0)
+        currentLat = intent.getDoubleExtra("currentLat", 37.4166)
+        currentLng = intent.getDoubleExtra("currentLng", 126.8872)
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)

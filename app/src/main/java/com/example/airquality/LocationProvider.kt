@@ -3,11 +3,8 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
-import android.util.Log
 import androidx.core.content.ContextCompat
-import androidx.core.location.LocationManagerCompat.requestLocationUpdates
 
 class LocationProvider(val context: Context) {
     // Location : 위도, 경도, 고도와 같이 위치에 관련된 정보를 가지고 있는 데이터 클래스
@@ -85,11 +82,11 @@ class LocationProvider(val context: Context) {
 
     // 위도 정보를 가져오는 함수
     fun getLocationLatitude(): Double {
-        return location?.latitude ?: 0.0
+        return location?.latitude ?: 37.4166
     }
 
     // 경도 정보르 가져오는 함수
     fun getLocationLongitude(): Double {
-        return location?.longitude ?: 0.0
+        return location?.longitude ?: 126.8872
     }
 }

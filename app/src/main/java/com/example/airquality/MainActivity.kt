@@ -39,8 +39,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     // 위도와 경도 저장
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
+    var latitude: Double = 37.4166
+    var longitude: Double = 126.8872
 
     // 런타임 권한 요청시 필요한 요청 코드
     private val PERMISSIONS_REQUEST_CODE = 100
@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
     object : ActivityResultCallback<ActivityResult> {
         override fun onActivityResult(result: ActivityResult?) {
             if (result?.resultCode ?: 0 == Activity.RESULT_OK) {
-                latitude = result?.data?.getDoubleExtra("latitude", 0.0) ?: 0.0
-                longitude = result?.data?.getDoubleExtra("longitude", 0.0) ?: 0.0
+                latitude = result?.data?.getDoubleExtra("latitude", 37.4166) ?: 37.4166
+                longitude = result?.data?.getDoubleExtra("longitude", 126.8872) ?: 126.8872
                 updateUI()
             }
         }
@@ -125,6 +125,7 @@ class MainActivity : AppCompatActivity() {
     private fun setRefreshButton() {
         binding.btnRefresh.setOnClickListener {
             updateUI()
+            Log.d("refreshBtnClicked","새로고침 되었습니다.")
         }
     }
 
@@ -167,6 +168,13 @@ class MainActivity : AppCompatActivity() {
             longitude = locationProvider.getLocationLongitude()
         }
 
+        Log.d("latitude", "$latitude")
+        Log.d("longitude", "$longitude")
+
+        // 임의의 위치 설정
+        latitude = 37.4166
+        longitude = 126.8872
+
         if (latitude != 0.0 || longitude != 0.0) {
             // 1. 현재 위치를 가져온 후 UI 업데이트
             val address = getCurrentAddress(latitude, longitude) // 주소가 null이 아닐 경우 UI 업데이트
@@ -177,9 +185,6 @@ class MainActivity : AppCompatActivity() {
 
             // 2. 현재 미세먼지 농도를 가져온 후 UI 업데이트
             getAirQualityData(latitude, longitude)
-            println(latitude)
-            println(longitude)
-
         } else {
             Toast.makeText(this@MainActivity, "위도, 경도 정보를 가져올 수 없었습니다. 새로고침을 눌러주세요.", Toast.LENGTH_LONG).show()
         }
@@ -189,7 +194,7 @@ class MainActivity : AppCompatActivity() {
     private fun getAirQualityData(latitude: Double, longitude: Double) {
         val retrofitAPI = RetrofitConnection.getInstance().create(AirQualityService::class.java)
 
-        retrofitAPI.getAirQualityData(latitude.toString(), longitude.toString(), "f8fd9cb8-5c8d237f-0c69-447f-a307-aeb7569a65eb")
+        retrofitAPI.getAirQualityData(latitude.toString(), longitude.toString(), "5c8d237f-0c69-447f-a307-aeb7569a65eb") // AirVisual Api key
             .enqueue(object : Callback<AirQualityResponse> {
                 override fun onResponse(
                     call: Call<AirQualityResponse>,
