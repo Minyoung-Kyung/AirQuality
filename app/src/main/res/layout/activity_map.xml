@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:letterSpacing="-0.035"
-            android:text="여기 미세먼지 농도 측정"
+            android:text="이 동네 미세먼지 농도 측정하기"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold" />

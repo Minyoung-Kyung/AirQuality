@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- 직접 추가한 색 -->
-    <color name="orange">#FF6E40</color>
+    <color name="orange">#ED765E</color>
     <color name="orange_transparent">#C3FF6E40</color>
 </resources>
